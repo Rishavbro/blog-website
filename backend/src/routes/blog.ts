@@ -47,7 +47,7 @@ blogRouter.post('/',async (c) => {
     const authorId = c.get("userId");
     console.log(authorId);
 
-    const success = createBlogInput.safeParse(body);
+    const {success} = createBlogInput.safeParse(body);
     if(!success){
         return c.json({
             message:'invalid inputs'
@@ -84,7 +84,7 @@ blogRouter.post('/',async (c) => {
 
     try {
         const body =await c.req.json();
-        const success = updateBlogInput.safeParse(body);
+        const {success} = updateBlogInput.safeParse(body);
         if(!success){
             return c.json({
                 message:'invalid inputs'
