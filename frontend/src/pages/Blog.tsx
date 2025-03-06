@@ -15,7 +15,7 @@ const Blog = () => {
   
   
 
-if(loading){
+if(loading || !blog){
 
   return  <div>
     <Appbar />
