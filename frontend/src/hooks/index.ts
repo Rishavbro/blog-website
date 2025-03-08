@@ -27,7 +27,7 @@ const response = await axios.get(`${BACKEND_URL}/api/v1/blog/${id}`,{
 }
   
 )
-console.log(response.data.blog)
+// console.log(response.data.blog)
    setBlog(response.data.blog);
    setIsLoading(false);
 
@@ -54,7 +54,7 @@ export const useBlogs = ()=>{
                 setBlogs(response.data.blogs);
                 setIsLoading(false);
             }catch(e){
-                console.log(e);
+                //console.log(e);
                 alert('something went wrong')
                 
             }

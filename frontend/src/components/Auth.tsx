@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { SignupInput } from '@rishav-kumar/blog-common';
 import axios from 'axios';
 import { BACKEND_URL } from '../config';
+import {  useSetRecoilState } from 'recoil';
+import { loginState } from '../loginState';
 
 
 const Auth = ({type}:{type :'signup' | 'signin'}) => {
@@ -13,6 +15,8 @@ const Auth = ({type}:{type :'signup' | 'signin'}) => {
         password:''
     });
     const navigate = useNavigate();
+     // const setLogin = useSetRecoilState(loginState);
+     const setLogin = useSetRecoilState(loginState)
 
    async function sendRequest(){
     try {
@@ -20,6 +24,9 @@ const Auth = ({type}:{type :'signup' | 'signin'}) => {
         // console.log(response)
         const jwt = response.data;
         localStorage.setItem("token",jwt);
+        setLogin(true);
+        
+         
         navigate("/blogs")
     } catch (error) {
         alert("Error while signing up")
@@ -35,7 +42,7 @@ const Auth = ({type}:{type :'signup' | 'signin'}) => {
                 {type==="signin" ? "Login" : "Create an account"}
             </div>
             <div className='text-slate-400'>
-            {type==="signin" ? "Don't have an account?" :"Already have an account"} <Link className='pt-2 text-blue-600 underline' to={type==="signup" ? "/signup" : '/signin'}>{type==="signin"?"Signup":"Login"}</Link>
+            {type==="signin" ? "Don't have an account?" :"Already have an account"} <Link onClick={()=>console.log('Type',type)} className='pt-2 text-blue-600 underline' to={type==="signup" ? "/signin" : '/signup'}>{type==="signin"?"Signup":"Login"}</Link>
             </div>
             </div>
             <div className='mt-2'>
